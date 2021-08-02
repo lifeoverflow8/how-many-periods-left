@@ -1,0 +1,148 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How many periods</title>
+    <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,700;1,900&display=swap');
+
+
+        html {
+            background-color: #150445;
+
+        }
+
+        #center {
+            position: absolute;
+            left: 5%;
+            top: 40%;
+            text-align: center;
+            color: #fff;
+            font-family: 'Roboto', sans-serif;
+            font-size: 48px;
+        }
+    </style>
+</head>
+<body>
+    <div id="center">
+        <span>there are</span>
+        <span id="periods" style="color:#ffea00">x</span>
+        <span>periods left of formal classes</span>
+        <br>
+        <span id="othertext"></span>
+    </div>
+    <script>
+        periodsElement = document.querySelector('#periods');
+otherTextElement = document.querySelector('#othertext');
+//Finishing Date
+//20th of September
+
+currentDate = Date.now();
+var finishDate = new Date('09/20/2021');
+
+currentDateDay = new Date(currentDate);
+currentDateDay.setHours(0);
+currentDateDay.setMinutes(0);
+currentDateDay.setSeconds(0);
+currentDateDay.setMilliseconds(0);
+
+var startDate = currentDateDay;
+var endDate = new Date('09/20/2021');
+var numOfDates = getBusinessDatesCount(startDate,endDate);
+
+periodsElement.innerHTML = numOfDates * 6;
+
+function getBusinessDatesCount(startDate, endDate) {
+    let count = 0;
+    const curDate = new Date(startDate.getTime());
+    while (curDate <= endDate) {
+        const dayOfWeek = curDate.getDay();
+        if(!(dayOfWeek in [0, 6])) count++;
+        curDate.setDate(curDate.getDate() + 1);
+    }
+    return count;
+}
+
+period1StartSeconds = (8 * 60 * 60) + (55 * 60);
+period2StartSeconds = (9 * 60 * 60) + (50 * 60);
+recessStart = (10 * 60 * 60) + (45 * 60);
+period4Start = (12 * 60 * 60) + (5 * 60);
+lunchStart = (13 * 60 * 60);
+period6Start = (14 * 60 * 60) + (25 * 60);
+schoolEnd = (15 * 60 * 60) + (15 * 60);
+
+window.setInterval(function() {
+    extraPeriods = 0;
+
+    var today = new Date();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    
+    console.log(time);
+    
+    
+    
+    if ((today.getHours() <= 8 && today.getMinutes() <= 55) || today.getHours() < 8) {
+        console.log('tis before period one');
+        differenceInSeconds = period1StartSeconds - ((today.getHours()*60*60) + (today.getMinutes() * 60) + today.getSeconds());
+        otherTextElement.innerHTML = 'There are ' + differenceInSeconds + ' seconds until period one';
+        extraPeriods = 6;
+    }
+    else if (today.getHours() <= 9 && today.getMinutes() <= 50) {
+        console.log('tisperiod1');
+        differenceInSeconds = period2StartSeconds - ((today.getHours()*60*60) + (today.getMinutes() * 60) + today.getSeconds());
+        extraPeriods = (5 + (differenceInSeconds / (55 * 60)));
+    }
+    else if ((today.getHours() <= 10 && today.getMinutes() <= 45)
+            || today.getHours() < 10)
+    {
+        console.log('tisperiod2');
+        differenceInSeconds = recessStart - ((today.getHours()*60*60) + (today.getMinutes() * 60) + today.getSeconds());
+        extraPeriods = (4 + (differenceInSeconds / (55 * 60)));
+    }
+    else if (today.getHours() == 10 ||
+            (today.getHours() == 11 && today.getMinutes() < 10)) {
+                console.log('tisrecess');
+                extraPeriods = 4;
+    }
+    else if (today.getHours() == 11 ||
+            (today.getHours() == 12 && today.getMinutes() < 5)) {
+                console.log('tisperiod3');
+                differenceInSeconds = period4Start - ((today.getHours()*60*60) + (today.getMinutes() * 60) + today.getSeconds());
+                extraPeriods = (3 + (differenceInSeconds / (55 * 60)));
+            }
+    else if (today.getHours() == 12) {
+        console.log('tisperiod4');
+        differenceInSeconds = lunchStart - ((today.getHours()*60*60) + (today.getMinutes() * 60) + today.getSeconds());
+        extraPeriods = (2 + (differenceInSeconds / (55 * 60)));
+    }
+    else if (today.getHours() == 13 && today.getMinutes() < 35) {
+        console.log('tislunch');
+        extraPeriods = 2;
+    }
+    else if(today.getHours() == 13 ||
+            (today.getHours() == 14 && today.getMinutes() < 25)) {
+                console.log('tisperiod5');
+                differenceInSeconds = period6Start - ((today.getHours()*60*60) + (today.getMinutes() * 60) + today.getSeconds());
+                extraPeriods = (1 + (differenceInSeconds / (55 * 60)));
+            }
+    else if (today.getHours() == 14 ||
+            (today.getHours() == 15 && today.getMinutes() < 15)) {
+                console.log('tisperiod6');
+                differenceInSeconds = schoolEnd - ((today.getHours()*60*60) + (today.getMinutes() * 60) + today.getSeconds());
+                extraPeriods = (0 + (differenceInSeconds / (55 * 60)));
+            }
+            else {
+                extraPeriods = 0;
+                console.log('schooloverkid');
+            }
+
+    var numOfDates = getBusinessDatesCount(startDate,endDate);
+
+    periodsElement.innerHTML = ((numOfDates * 6) + extraPeriods).toFixed(2);
+}, 1000/5);
+    </script>
+</body>
+</html>
