@@ -9,11 +9,35 @@
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,700;1,900&display=swap');
 
+        body { 
+background: linear-gradient(124deg, #150445, #3096fc);
+background-size: 1800% 1800%;
 
-        html {
-            background-color: #150445;
+-webkit-animation: rainbow 18s ease infinite;
+-z-animation: rainbow 18s ease infinite;
+-o-animation: rainbow 18s ease infinite;
+  animation: rainbow 18s ease infinite;}
 
-        }
+@-webkit-keyframes rainbow {
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+@-moz-keyframes rainbow {
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+@-o-keyframes rainbow {
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+@keyframes rainbow { 
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
 
         #center {
             position: absolute;
@@ -24,12 +48,16 @@
             font-family: 'Roboto', sans-serif;
             font-size: 48px;
         }
+
+        #periods {
+            color: #fff;
+        }
     </style>
 </head>
 <body>
     <div id="center">
         <span>there are</span>
-        <span id="periods" style="color:#ffea00">x</span>
+        <span id="periods">x</span>
         <span>periods left of formal classes</span>
         <br>
         <span id="othertext"></span>
