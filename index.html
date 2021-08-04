@@ -169,7 +169,7 @@ window.setInterval(function() {
 
     var numOfDates = getBusinessDatesCount(startDate,endDate);
 
-    periodsElement.innerHTML = ((numOfDates * 6) + extraPeriods).toFixed(2);
+    periodsElement.innerHTML = ((numOfDates * 6) + extraPeriods) - 6).toFixed(2);
 }, 1000/5);
     </script>
 </body>
